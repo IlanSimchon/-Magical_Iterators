@@ -30,9 +30,18 @@ namespace  ariel {
 
             AscendingIterator(MagicalContainer &cont, int index);
 
+            AscendingIterator(AscendingIterator &other) = default;
+            AscendingIterator(AscendingIterator&& other) noexcept = default;
+
+            ~AscendingIterator() = default;
+
             AscendingIterator begin();
 
             AscendingIterator end();
+
+            AscendingIterator&  operator=(AscendingIterator const &other);
+            AscendingIterator& operator=(AscendingIterator&& other) noexcept;
+
 
             bool operator==(AscendingIterator other) const;
 
@@ -42,7 +51,7 @@ namespace  ariel {
 
             bool operator>(AscendingIterator other) const;
 
-            AscendingIterator operator++();
+            AscendingIterator& operator++();
 
             int operator*();
 
@@ -60,9 +69,18 @@ namespace  ariel {
 
             SideCrossIterator(MagicalContainer &cont, int index);
 
+            SideCrossIterator(SideCrossIterator& other) = default;
+            SideCrossIterator(SideCrossIterator&& other) noexcept = default;
+
+            ~SideCrossIterator() = default;
+
             SideCrossIterator begin();
 
             SideCrossIterator end();
+
+            SideCrossIterator& operator=(SideCrossIterator const &other);
+            SideCrossIterator& operator=(SideCrossIterator&& other) noexcept;
+
 
             bool operator==(SideCrossIterator other) const;
 
@@ -72,7 +90,7 @@ namespace  ariel {
 
             bool operator>(SideCrossIterator other) const;
 
-            SideCrossIterator operator++();
+            SideCrossIterator& operator++();
 
             int operator*();
 
@@ -86,9 +104,19 @@ namespace  ariel {
 
                 PrimeIterator(MagicalContainer &cont, int index);
 
+                PrimeIterator(PrimeIterator& other) = default;
+                PrimeIterator(PrimeIterator&& other) noexcept = default;
+
+
+                ~PrimeIterator() = default;
+
                 PrimeIterator begin();
 
                 PrimeIterator end();
+
+                PrimeIterator& operator=(PrimeIterator const &other);
+                PrimeIterator& operator=(PrimeIterator&& other) noexcept;
+
 
                 bool operator==(PrimeIterator other) const;
 
@@ -98,7 +126,7 @@ namespace  ariel {
 
                 bool operator>(PrimeIterator other) const;
 
-                PrimeIterator operator++();
+                PrimeIterator& operator++();
 
                 int operator*();
 

@@ -20,6 +20,8 @@ void MagicalContainer::addElement(int element) {
 }
 
 void MagicalContainer::removeElement(int value) {
+    if(!this->contains(value))
+        throw runtime_error("");
     for (vector<int>::size_type i = 0; i < this->myContainer.size(); ++i) {
         if (this->myContainer.at(i) == value)
             this->myContainer.erase(this->myContainer.begin() + (int) i);
@@ -47,6 +49,13 @@ MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::begin()
 
 MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end() {
     return AscendingIterator(this->cont , this->cont.size());
+}
+
+MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operator=(MagicalContainer::AscendingIterator const &other) {
+    if(&this->cont != &other.cont)
+        throw runtime_error("");
+    this->index = other.index;
+    return *this;
 }
 
 bool MagicalContainer::AscendingIterator::operator==(MagicalContainer::AscendingIterator other) const{
@@ -78,10 +87,13 @@ bool MagicalContainer::AscendingIterator::operator<(MagicalContainer::AscendingI
     return this->index < other.index;
 }
 
-MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::operator++() {
+MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operator++() {
+    if(*this == this->end())
+        throw runtime_error("");
     this->index++;
     return *this;
 }
+
 
 // SideCrossIterator
 
@@ -96,6 +108,13 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::begin()
 
 MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() {
     return SideCrossIterator(this->cont , cont.size());
+}
+
+MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::operator=(MagicalContainer::SideCrossIterator const &other) {
+    if(&this->cont != &other.cont)
+        throw runtime_error("");
+    this->index = other.index;
+    return *this;
 }
 
 bool MagicalContainer::SideCrossIterator::operator==(MagicalContainer::SideCrossIterator other) const {
@@ -119,7 +138,9 @@ bool MagicalContainer::SideCrossIterator::operator>(MagicalContainer::SideCrossI
     return this->index > other.index;
 }
 
-MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::operator++() {
+MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::operator++() {
+    if(*this == this->end())
+        throw runtime_error("");
     if (s_index == e_index)
         index = this->cont.size();
     else if (this->index < this->cont.size()/2) {
@@ -152,6 +173,13 @@ MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::end() {
     return PrimeIterator(this->cont , this->cont.primes.size());
 }
 
+MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::operator=(MagicalContainer::PrimeIterator const &other) {
+    if(&this->cont != &other.cont)
+        throw runtime_error("");
+    this->index = other.index;
+    return *this;
+}
+
 bool MagicalContainer::PrimeIterator::operator==(MagicalContainer::PrimeIterator other) const {
     if(&this->cont != &other.cont)
         throw runtime_error("");
@@ -173,7 +201,9 @@ bool MagicalContainer::PrimeIterator::operator>(MagicalContainer::PrimeIterator 
     return this->index > other.index;
 }
 
-MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::operator++() {
+MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::operator++() {
+    if(*this == this->end())
+        throw runtime_error("");
     this->index++;
     return  *this;
 }
